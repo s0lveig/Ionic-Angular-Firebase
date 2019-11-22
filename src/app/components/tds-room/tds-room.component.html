@@ -1,0 +1,19 @@
+<article>
+  <ion-grid>
+    <ion-row>
+      <ion-card>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="10"><ion-label class="text-bold" color="dark">{{roomData.host}}</ion-label></ion-col>
+              <ion-col size="1"><ion-icon name="people" color="medium"></ion-icon></ion-col>
+              <ion-col size="1"><ion-card-subtitle color="medium">{{roomData.size}}</ion-card-subtitle></ion-col>
+            </ion-row>
+          </ion-grid>
+        <img [src]="roomData.image" />
+        <ion-card-content>
+          <ion-text>{{roomData.description}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</article>

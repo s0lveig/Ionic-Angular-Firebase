@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>newroom</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <!--<img *ngIf="cameraPreview" src="{{'data:image/jpeg;base64, ' + cameraPreview}}" style="max-height: 40vh" />-->
+        <ion-card-content>
+          <!--<ion-button (click)="takePicture()">Ta bilde</ion-button>-->
+          <form (ngSubmit)="postToFirebase()">
+            <ion-item>
+              <ion-label>Todo</ion-label>
+              <ion-input type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-textarea [(ngModel)]="todo.description" name="description"></ion-textarea>
+            </ion-item>
+            <button ion-button type="submit" block>Add Todo</button>
+          </form>
+          <ion-button (click)="postToFirebase()">Add new room +</ion-button>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
