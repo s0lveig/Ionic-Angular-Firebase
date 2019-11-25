@@ -25,7 +25,46 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+$toolbar-md-button-color: #fff; 
+$toolbar-md-title-text-color: #fff;
 
 .text-bold {
     font-weight: bold;
+}
+
+ion-input {
+    --background: #fff !important;
+    border-radius: 5px;
+    color: #000 !important;
+    margin: 0.3rem 0;
+    padding: 5px;
+}
+
+ion-toolbar {
+    --background: #007a50;
+    color: #fff !important;
+}
+
+ion-toolbar ion-icon, ion-back-button {
+    color: #fff !important;
+}
+
+.primary-btn {
+    --background: #007a50;
+    --background-hover: #fff;
+    --border-width: 3px;
+    --border-style: solid;
+    --border-color: #007a50;
+    --color-hover: #000;
+    --background-activated: #007a50;
+}
+
+.secondary-btn {
+    --background: #1fbe88;
+    --background-hover: #fff;
+    --border-width: 3px;
+    --border-style: solid;
+    --border-color: #1fbe88;
+    --color-hover: #000;
+    --background-activated: #1fbe88;
 }

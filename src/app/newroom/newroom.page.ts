@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Camera, CameraOptions} from "@ionic-native/camera/ngx";
 import IRoom from '../models/IRoom';
-import { first} from 'rxjs/operators';
 import { v4 as uuid } from "uuid";
-import { ParseError } from '@angular/compiler';
 import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 
@@ -16,59 +14,63 @@ import { Router } from '@angular/router';
 })
 export class NewroomPage implements OnInit {
   toastController: any;
+  private cameraPreview: string = "";
 
   constructor(
+    private camera: Camera,
     private firestorage: AngularFireStorage,
     private firestore: AngularFirestore,
-    private fireauth: AngularFireAuth,
     private router: Router
   ) {}
 
-  private todo = { title: "", description: ""}
+  private room = { title: "", description: "", size: 0, address: "", latitude: 0, longitude: 0}
 
   ngOnInit() {
   }
 
-  async postToFirebase() {
-    //const uploadedImageUrl = await this.uploadImageToFirestorage();
-    const roomsCollectionRef = this.firestore.collection<IRoom>("rooms");
-    const loggedInUser = await this.fireauth.authState.pipe(first()).toPromise();
+  async takePicture() {
+    const cameraOptions: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
     
+    try {
+      const imageData = await this.camera.getPicture(cameraOptions);
+      this.cameraPreview = imageData;
+      
+    } catch(e) {
+      console.log("Error: " + e);
+    }
+  }
+
+  async postToFirebase() {
+    let uploadedImageUrl = await this.uploadImageToFirestorage();
+    const roomsCollectionRef = this.firestore.collection<IRoom>("rooms");
 
     await roomsCollectionRef.add({
-      host: this.todo.title, 
+      id: uuid(),
+      host: this.room.title, 
       booked: false,
-      description: this.todo.description,
-      image: "https://meshnorway.com/wp-content/uploads/2018/11/09A7016.jpg",
+      description: this.room.description,
+      image: uploadedImageUrl,
       rating: 5,
-      size: 20,
-      location: new firestore.GeoPoint(59.9, 10.5)
+      size: this.room.size,
+      address: this.room.address,
+      location: new firestore.GeoPoint(this.room.latitude, this.room.longitude)
     })
 
     this.router.navigate(['feed']);
 
   }
-/*
-  private todo = { title: "", description: ""}
-logForm() {
-    console.log(this.todo)
-  }
-
-
-  async logForm() {
-    const todoTitle = await this.todo.title
-    const todoDesc = await this.todo.description
-    console.log(todoTitle)
-  }*/
-
-  /*
+  
   async uploadImageToFirestorage() {
     const fileName = `tds-${uuid()}.png`;
     const firestorageFileref = this.firestorage.ref(fileName);
     const uploadTask = firestorageFileref.putString(this.cameraPreview, 'base64', {contentType: 'image.png'});
     await uploadTask.then();
     return firestorageFileref.getDownloadURL().toPromise();
-    //uploadTask.percentageChanges
   }
-*/
+
 }

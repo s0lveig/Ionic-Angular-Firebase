@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-container">
+    <ion-item>
+      <ion-label>Username:</ion-label><ion-text id="userName"></ion-text>
+    </ion-item>
+    <br />
+    <ion-button expand="block" [routerLink]="['/logout']" class="secondary-btn">Logout</ion-button>
+  </div>
+</ion-content>

@@ -3,12 +3,12 @@
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-    <ion-title>Room feed</ion-title>
+    <ion-title>Available rooms</ion-title>
       <ion-buttons slot="primary">
           <ion-button [routerLink]="['/newroom']">
             <ion-icon slot="icon-only" name="add"></ion-icon>
           </ion-button>
-          <ion-button [routerLink]="['/logout']">
+          <ion-button [routerLink]="['/profile']">
             <ion-icon slot="icon-only" name="person"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -17,9 +17,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let room of rooms$ | async" lines="none" (click)="navigateToDetailView(room)">
-          <!--<app-tds-room [roomData]="room" [showDescription]="false"></app-tds-room>-->
-        
+        <ion-item *ngFor="let room of rooms$ | async" lines="none" (click)="navigateToDetailView(room)">        
                   <ion-card>
                       <ion-grid>
                         <ion-row>
@@ -30,7 +28,6 @@
                       </ion-grid>
                     <img [src]="room.image" />
                   </ion-card>
-        
         </ion-item>
       </ion-list>
 </ion-content>

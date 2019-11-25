@@ -2,28 +2,47 @@
   <ion-toolbar>
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
-        </ion-buttons>
-    <ion-title>newroom</ion-title>
+      </ion-buttons>
+    <ion-title>Add new room</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button [routerLink]="['/profile']">
+          <ion-icon slot="icon-only" name="person"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-card>
-        <!--<img *ngIf="cameraPreview" src="{{'data:image/jpeg;base64, ' + cameraPreview}}" style="max-height: 40vh" />-->
+        <img *ngIf="cameraPreview" src="{{'data:image/jpeg;base64, ' + cameraPreview}}" style="max-height: 40vh" />
+      
         <ion-card-content>
-          <!--<ion-button (click)="takePicture()">Ta bilde</ion-button>-->
           <form (ngSubmit)="postToFirebase()">
             <ion-item>
-              <ion-label>Todo</ion-label>
-              <ion-input type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+              <ion-input placeholder="Name of host" [(ngModel)]="room.title" name="title" type="text"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Description</ion-label>
-              <ion-textarea [(ngModel)]="todo.description" name="description"></ion-textarea>
+              <ion-input placeholder="Desciption" [(ngModel)]="room.description" name="description" type="text"></ion-input>
             </ion-item>
-            <button ion-button type="submit" block>Add Todo</button>
+            <ion-item>
+              <ion-label>Number of people:</ion-label>
+              <ion-input [(ngModel)]="room.size" name="size" type="number"></ion-input>
+            </ion-item>
+            <br />
+            <ion-item>
+              <ion-input placeholder="Address" [(ngModel)]="room.address" name="address" type="text"></ion-input>
+            </ion-item>
+              <br />
+            <ion-item>
+              <ion-label>Latitude:</ion-label><ion-input placeholder="Latitude" [(ngModel)]="room.latitude" name="latitude" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Longitude:</ion-label><ion-input placeholder="Longitude" [(ngModel)]="room.longitude" name="longitude" type="number"></ion-input>
+            </ion-item>
+              <br />
+            <ion-button (click)="takePicture()" class="secondary-btn">Ta bilde</ion-button>
+            <ion-button type="submit" class="primary-btn">Add new room</ion-button>
           </form>
-          <ion-button (click)="postToFirebase()">Add new room +</ion-button>
         </ion-card-content>
       </ion-card>
 </ion-content>

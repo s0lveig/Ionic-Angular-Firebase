@@ -4,9 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-input [(ngModel)]="user.username" placeholder="Brukernavn"></ion-input>
-  <ion-input [(ngModel)]="user.password" placeholder="Passord" type="password"></ion-input>
-  <ion-button (click)="loginUser()">Logg inn</ion-button>
-  <ion-button (click)="registerUser()">Registrer</ion-button>
-</ion-content>
+  <div class="login-container">
+    <div class="inner-container">
+    <ion-input [(ngModel)]="user.username" placeholder=" Email"></ion-input>
+    <ion-input [(ngModel)]="user.password" placeholder=" Password" type="password"></ion-input>
+    <ion-button expand="block" class="primary-btn" (click)="loginUser()">Login</ion-button>
+    <ion-button expand="block" class="secondary-btn" (click)="registerUser()">Register</ion-button>
+  </div>
+</div>

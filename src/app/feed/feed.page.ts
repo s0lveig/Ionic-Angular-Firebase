@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router, NavigationExtras } from '@angular/router';
 
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
@@ -14,6 +15,7 @@ export class FeedPage implements OnInit {
 
   private rooms$: Observable<IRoom[]>;
   fireAuth: any;
+  bookingArray = [];
 
   constructor(private firestore: AngularFirestore, fireAuth: AngularFireAuth, private router: Router) {
 
@@ -28,7 +30,6 @@ export class FeedPage implements OnInit {
   }
 
   navigateToDetailView(tappedRoom: IRoom) {
-
     let navigationExtras: NavigationExtras = {
       state: {
         room: tappedRoom
@@ -37,5 +38,4 @@ export class FeedPage implements OnInit {
 
     this.router.navigate(['detail-view'], navigationExtras);
   }
-
 }

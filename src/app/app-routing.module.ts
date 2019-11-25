@@ -5,8 +5,10 @@ import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from "@angula
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',
-  loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
-  { path: 'feed',
+  loadChildren: './home/home.module#HomePageModule',
+...canActivate(redirectUnauthorizedTo(['login']))
+},  
+{ path: 'feed',
   loadChildren: './feed/feed.module#FeedPageModule',
 ...canActivate(redirectUnauthorizedTo(['login']))
 },
@@ -18,10 +20,13 @@ loadChildren: './login/login.module#LoginPageModule'
 ...canActivate(redirectLoggedInTo(['home']))
 },
   { path: 'newroom', loadChildren: './newroom/newroom.module#NewroomPageModule' },
-  { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' },
   {
     path: 'detail-view',
     loadChildren: () => import('./detail-view/detail-view.module').then( m => m.DetailViewPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
 ];
 
